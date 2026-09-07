@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mamaa's International — Social Media, Made Magnetic</title>
+<meta name="description" content="Mamaa's International is a social media management agency that turns scrolls into sales.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --grape:#4B2E83;
+    --grape-deep:#1D1730;
+    --coral:#FF6B5B;
+    --sunshine:#FFC94A;
+    --mint:#2FE0C0;
+    --cream:#FFF6EC;
+    --ink:#241C3D;
+    --line: rgba(36,28,61,0.12);
+    --max: 1180px;
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  html,body{
+    margin:0; padding:0;
+    max-width:100%;
+    overflow-x:hidden;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Manrope', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{ max-width:100%; display:block; }
+  a{ color:inherit; text-decoration:none; }
+  h1,h2,h3{
+    font-family:'Fredoka', sans-serif;
+    font-weight:600;
+    margin:0;
+    line-height:1.05;
+  }
+  p{ margin:0; }
+  ul{ list-style:none; margin:0; padding:0; }
+  button{ font-family:inherit; cursor:pointer; }
+  section{ position:relative; }
+  .wrap{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:0 28px;
+  }
+  :focus-visible{
+    outline:3px solid var(--grape);
+    outline-offset:3px;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }
+  }
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:sticky; top:0; z-index:100;
+    background:rgba(255,246,236,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom:2px solid var(--ink);
+  }
+  .nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:76px;
+  }
+  .logo{
+    font-family:'Fredoka', sans-serif;
+    font-weight:700;
+    font-size:1.4rem;
+    letter-spacing:-0.02em;
+    display:flex; align-items:center; gap:8px;
+  }
+  .logo .dot{
+    width:12px; height:12px; border-radius:50%;
+    background:var(--coral);
+    display:inline-block;
+  }
+  .nav-links{ display:flex; gap:34px; }
+  .nav-links a{
+    font-weight:700; font-size:0.98rem;
+    position:relative;
+    padding:4px 2px;
+  }
+  .nav-links a::after{
+    content:''; position:absolute; left:0; right:100%; bottom:-2px; height:3px;
+    background:var(--coral); transition:right .25s ease;
+    border-radius:2px;
+  }
+  .nav-links a:hover::after{ right:0; }
+  .nav-cta{
+    background:var(--ink); color:var(--cream);
+    padding:11px 22px; border-radius:100px;
+    font-weight:700; font-size:0.92rem;
+    border:2px solid var(--ink);
+  }
+  .nav-cta:hover{ background:var(--coral); border-color:var(--coral); color:var(--ink); }
+  .burger{
+    display:none;
+    width:44px; height:44px;
+    border-radius:50%;
+    border:2px solid var(--ink);
+    background:transparent;
+    position:relative;
+  }
+  .burger span, .burger span::before, .burger span::after{
+    content:''; position:absolute; left:11px; right:11px; height:2.5px; background:var(--ink);
+    transition:transform .25s ease, opacity .25s ease;
+  }
+  .burger span{ top:21px; }
+  .burger span::before{ top:-7px; }
+  .burger span::after{ top:7px; }
+  .burger.open span{ background:transparent; }
+  .burger.open span::before{ transform:rotate(45deg) translate(5px,6px); }
+  .burger.open span::after{ transform:rotate(-45deg) translate(5px,-6px); }
+
+  .mobile-panel{
+    display:none;
+    background:var(--cream);
+    border-bottom:2px solid var(--ink);
+  }
+  .mobile-panel.open{ display:block; }
+  .mobile-panel .wrap{
+    flex-direction:column; align-items:flex-start; height:auto;
+    padding:14px 28px 24px;
+    display:flex; gap:4px;
+  }
+  .mobile-panel a{
+    width:100%; padding:14px 0; font-weight:700; font-size:1.15rem;
+    border-bottom:1px solid var(--line);
+  }
+  .mobile-panel a:last-child{ border-bottom:none; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:86px 0 70px;
+    overflow:hidden;
+  }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns:1.2fr 0.9fr;
+    gap:40px;
+    align-items:center;
+  }
+  .blob{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(2px);
+    z-index:0;
+    opacity:0.55;
+  }
+  .blob-a{ width:340px; height:340px; background:var(--mint); top:-120px; right:-80px; animation:float1 9s ease-in-out infinite; }
+  .blob-b{ width:220px; height:220px; background:var(--sunshine); bottom:-60px; left:-60px; animation:float2 11s ease-in-out infinite; }
+  @keyframes float1{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(24px) } }
+  @keyframes float2{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-18px) } }
+
+  .hero-copy{ position:relative; z-index:2; opacity:0; transform:translateY(18px); animation:rise .7s ease forwards; }
+  .hero-copy .eyebrow-free{ display:none; }
+  .hero-tag{
+    display:inline-block;
+    background:var(--ink); color:var(--cream);
+    padding:8px 16px; border-radius:100px;
+    font-weight:700; font-size:0.85rem;
+    transform:rotate(-3deg);
+    margin-bottom:22px;
+  }
+  .hero h1{
+    font-size:clamp(2.4rem, 5.4vw, 4.3rem);
+    letter-spacing:-0.02em;
+  }
+  .hero h1 .line2{ color:var(--coral); }
+  .hero h1 .line3{
+    -webkit-text-stroke:2px var(--ink);
+    color:transparent;
+  }
+  .hero-sub{
+    margin-top:24px;
+    font-size:1.15rem;
+    line-height:1.6;
+    max-width:480px;
+    color:var(--ink);
+    opacity:0.85;
+  }
+  .hero-actions{ display:flex; gap:16px; margin-top:36px; flex-wrap:wrap; }
+  .btn-primary, .btn-ghost{
+    padding:16px 30px; border-radius:100px; font-weight:700; font-size:1rem;
+    border:2.5px solid var(--ink);
+    display:inline-block;
+  }
+  .btn-primary{ background:var(--coral); color:var(--ink); box-shadow:5px 5px 0 var(--ink); transition:transform .15s ease, box-shadow .15s ease; }
+  .btn-primary:hover{ transform:translate(3px,3px); box-shadow:2px 2px 0 var(--ink); }
+  .btn-ghost{ background:transparent; color:var(--ink); }
+  .btn-ghost:hover{ background:var(--ink); color:var(--cream); }
+
+  .hero-stats{ display:flex; gap:30px; margin-top:48px; flex-wrap:wrap; }
+  .hero-stats div strong{ font-family:'Fredoka'; font-size:1.8rem; display:block; }
+  .hero-stats div span{ font-size:0.85rem; opacity:0.7; font-weight:600; }
+
+  .hero-visual{
+    position:relative; z-index:2;
+    opacity:0; transform:translateY(18px) rotate(2deg); animation:rise .7s ease .15s forwards;
+  }
+  .hero-card{
+    background:var(--ink); color:var(--cream);
+    border-radius:28px;
+    padding:26px;
+    transform:rotate(3deg);
+    box-shadow:10px 10px 0 var(--coral);
+  }
+  .hero-card .phone-top{ display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; font-size:0.8rem; opacity:0.7; font-weight:700; }
+  .post{
+    background:rgba(255,255,255,0.06);
+    border-radius:18px;
+    padding:16px;
+    margin-bottom:12px;
+  }
+  .post .avatar{
+    width:34px; height:34px; border-radius:50%; background:var(--mint);
+    display:inline-block; margin-right:10px; vertical-align:middle;
+  }
+  .post .who{ font-weight:700; font-size:0.9rem; vertical-align:middle; }
+  .post .cap{ margin-top:10px; font-size:0.88rem; opacity:0.85; line-height:1.5; }
+  .post .stats{ display:flex; gap:16px; margin-top:12px; font-size:0.8rem; opacity:0.7; font-weight:700; }
+  .post.hi{ background:var(--sunshine); color:var(--ink); }
+  .post.hi .cap{ opacity:0.8; }
+
+  @keyframes rise{ to{ opacity:1; transform:translateY(0) rotate(0); } }
+
+  /* ---------- MARQUEE ---------- */
+  .marquee{
+    background:var(--ink); color:var(--cream);
+    padding:16px 0; overflow:hidden;
+    border-top:2px solid var(--ink); border-bottom:2px solid var(--ink);
+  }
+  .marquee-track{
+    display:flex; gap:48px; white-space:nowrap;
+    animation:scroll 26s linear infinite;
+    width:max-content;
+  }
+  .marquee-track span{ font-family:'Fredoka'; font-weight:600; font-size:1.15rem; opacity:0.9; }
+  .marquee-track span::after{ content:'✦'; margin-left:48px; color:var(--coral); }
+  @keyframes scroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+
+  /* ---------- SECTION HEAD ---------- */
+  .sec-head{ max-width:640px; margin-bottom:52px; }
+  .sec-head h2{ font-size:clamp(1.9rem, 3.6vw, 2.7rem); }
+  .sec-head p{ margin-top:14px; font-size:1.05rem; opacity:0.8; line-height:1.6; }
+  .kicker{
+    display:inline-block; font-weight:700; color:var(--coral); font-size:0.95rem;
+    margin-bottom:10px;
+  }
+
+  /* ---------- SERVICES ---------- */
+  .services{ padding:100px 0 90px; }
+  .service-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:22px;
+  }
+  .s-card{
+    background:var(--cream);
+    border:2.5px solid var(--ink);
+    border-radius:22px;
+    padding:28px;
+    transition:transform .2s ease, box-shadow .2s ease;
+    box-shadow:6px 6px 0 var(--ink);
+  }
+  .s-card:nth-child(2){ background:var(--mint); }
+  .s-card:nth-child(4){ background:var(--sunshine); }
+  .s-card:nth-child(6){ background:var(--coral); }
+  .s-card:hover{ transform:translate(-3px,-3px); box-shadow:9px 9px 0 var(--ink); }
+  .s-num{ font-family:'Fredoka'; font-size:0.9rem; font-weight:700; opacity:0.55; }
+  .s-card h3{ font-size:1.3rem; margin-top:14px; }
+  .s-card p{ margin-top:10px; font-size:0.95rem; line-height:1.55; opacity:0.85; }
+
+  /* ---------- ABOUT ---------- */
+  .about{ padding:90px 0; background:var(--ink); color:var(--cream); border-top:2px solid var(--ink); border-bottom:2px solid var(--ink); }
+  .about .wrap{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; }
+  .about .kicker{ color:var(--mint); }
+  .about h2{ font-size:clamp(1.9rem, 3.6vw, 2.6rem); color:var(--cream); }
+  .about-text{ margin-top:20px; font-size:1.05rem; line-height:1.75; opacity:0.85; }
+  .about-text + .about-text{ margin-top:14px; }
+  .about-stats{ display:grid; grid-template-columns:1fr 1fr; gap:26px; }
+  .stat-box{ border:2px solid rgba(255,246,236,0.25); border-radius:20px; padding:24px; }
+  .stat-box strong{ font-family:'Fredoka'; font-size:2.4rem; color:var(--sunshine); display:block; }
+  .stat-box span{ font-size:0.9rem; opacity:0.75; font-weight:600; }
+
+  /* ---------- PORTFOLIO ---------- */
+  .portfolio{ padding:100px 0 90px; }
+  .p-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:22px;
+  }
+  .p-card{
+    border-radius:22px;
+    overflow:hidden;
+    border:2.5px solid var(--ink);
+    background:var(--cream);
+  }
+  .p-thumb{
+    height:190px;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fredoka'; font-weight:600; font-size:1.5rem; color:var(--ink);
+  }
+  .p-thumb.g1{ background:linear-gradient(135deg, var(--coral), var(--sunshine)); }
+  .p-thumb.g2{ background:linear-gradient(135deg, var(--mint), var(--grape)); color:var(--cream); }
+  .p-thumb.g3{ background:linear-gradient(135deg, var(--sunshine), var(--mint)); }
+  .p-thumb.g4{ background:linear-gradient(135deg, var(--grape), var(--coral)); color:var(--cream); }
+  .p-thumb.g5{ background:linear-gradient(135deg, var(--coral), var(--mint)); }
+  .p-thumb.g6{ background:linear-gradient(135deg, var(--sunshine), var(--grape)); color:var(--cream); }
+  .p-body{ padding:20px; }
+  .p-body .tag{ font-size:0.78rem; font-weight:700; color:var(--coral); }
+  .p-body h3{ font-size:1.15rem; margin-top:8px; }
+  .p-body p{ font-size:0.9rem; opacity:0.75; margin-top:6px; }
+
+  /* ---------- CONTACT ---------- */
+  .contact{ padding:100px 0 110px; }
+  .contact-panel{
+    background:var(--sunshine);
+    border:2.5px solid var(--ink);
+    border-radius:30px;
+    padding:56px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    box-shadow:10px 10px 0 var(--ink);
+  }
+  .contact h2{ font-size:clamp(1.8rem, 3.4vw, 2.4rem); }
+  .contact-panel p.lead{ margin-top:14px; font-size:1.02rem; opacity:0.85; line-height:1.6; }
+  .contact-list{ margin-top:28px; display:flex; flex-direction:column; gap:14px; }
+  .contact-list a{ font-weight:700; font-size:1.05rem; display:flex; align-items:center; gap:10px; }
+  .contact-list .ico{
+    width:34px; height:34px; border-radius:50%; background:var(--ink); color:var(--sunshine);
+    display:flex; align-items:center; justify-content:center; font-size:0.9rem; flex-shrink:0;
+  }
+  .form-field{ margin-bottom:16px; }
+  .form-field label{ display:block; font-weight:700; font-size:0.88rem; margin-bottom:6px; }
+  .form-field input, .form-field textarea{
+    width:100%; padding:13px 16px; border-radius:12px; border:2px solid var(--ink);
+    font-family:inherit; font-size:0.95rem; background:var(--cream); color:var(--ink);
+  }
+  .form-field textarea{ resize:vertical; min-height:90px; }
+  .form-field input:focus, .form-field textarea:focus{ outline:3px solid var(--grape); outline-offset:1px; }
+  .submit-btn{
+    background:var(--ink); color:var(--cream); border:2.5px solid var(--ink);
+    padding:15px 28px; border-radius:100px; font-weight:700; width:100%; font-size:1rem;
+  }
+  .submit-btn:hover{ background:var(--coral); color:var(--ink); }
+  .form-note{ margin-top:14px; font-size:0.82rem; opacity:0.7; }
+
+  /* ---------- FOOTER ---------- */
+  footer{ background:var(--ink); color:var(--cream); padding:40px 0; }
+  footer .wrap{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+  footer .logo{ color:var(--cream); }
+  .foot-links{ display:flex; gap:22px; flex-wrap:wrap; }
+  .foot-links a{ font-size:0.9rem; opacity:0.8; font-weight:600; }
+  .foot-links a:hover{ opacity:1; }
+  .foot-copy{ font-size:0.82rem; opacity:0.55; width:100%; margin-top:18px; text-align:center; }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:980px){
+    .nav-links, .nav-cta{ display:none; }
+    .burger{ display:block; }
+    .hero .wrap{ grid-template-columns:1fr; }
+    .hero-visual{ order:-1; max-width:380px; margin:0 auto; }
+    .about .wrap{ grid-template-columns:1fr; gap:36px; }
+    .service-grid{ grid-template-columns:repeat(2, 1fr); }
+    .p-grid{ grid-template-columns:repeat(2, 1fr); }
+    .contact-panel{ grid-template-columns:1fr; padding:36px 26px; }
+  }
+  @media (max-width:600px){
+    .wrap{ padding:0 20px; }
+    .hero{ padding:56px 0 50px; }
+    .service-grid{ grid-template-columns:1fr; }
+    .p-grid{ grid-template-columns:1fr; }
+    .about-stats{ grid-template-columns:1fr 1fr; }
+    .hero-stats{ gap:22px; }
+    .contact-panel{ padding:28px 20px; border-radius:22px; }
+    .hero-card{ padding:18px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a href="#home" class="logo"><span class="dot"></span>Mamaa's <span style="color:var(--coral)">International</span></a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Let's talk</a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span></button>
+  </div>
+</nav>
+<div class="mobile-panel" id="mobilePanel">
+  <div class="wrap">
+    <a href="#home">Home</a>
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#contact">Contact</a>
+  </div>
+</div>
+
+<section class="hero" id="home">
+  <div class="blob blob-a"></div>
+  <div class="blob blob-b"></div>
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="hero-tag">Social media, minus the guesswork</span>
+      <h1>We turn <span class="line2">scrolls</span> into <span class="line3">sales</span>.</h1>
+      <p class="hero-sub">Mamaa's International plans, creates, and runs social media for brands who'd rather grow than guess. Strategy, content, and ads — handled by one team that actually replies to your messages.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Book a strategy call</a>
+        <a href="#portfolio" class="btn-ghost">See our work</a>
+      </div>
+      <div class="hero-stats">
+        <div><strong>120+</strong><span>Brands grown</span></div>
+        <div><strong>18M+</strong><span>Followers built</span></div>
+        <div><strong>4.9/5</strong><span>Client rating</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="phone-top"><span>@mamaasinternational</span><span>●●●</span></div>
+        <div class="post">
+          <span class="avatar"></span><span class="who">Client — Café Loom</span>
+          <div class="cap">"Reel #3 hit 240K views overnight 🎉"</div>
+          <div class="stats"><span>♥ 18.2K</span><span>↻ 3.1K</span><span>✉ 940</span></div>
+        </div>
+        <div class="post hi">
+          <span class="avatar" style="background:var(--coral)"></span><span class="who">Client — Bloom & Co</span>
+          <div class="cap">Bookings up 3x since launch month.</div>
+          <div class="stats"><span>♥ 9.4K</span><span>↻ 1.2K</span><span>✉ 310</span></div>
+        </div>
+        <div class="post">
+          <span class="avatar" style="background:var(--sunshine)"></span><span class="who">Client — Studio Vetra</span>
+          <div class="cap">Sold out the pop-up in 6 hours.</div>
+          <div class="stats"><span>♥ 12.7K</span><span>↻ 2.4K</span><span>✉ 560</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Content Strategy</span>
+    <span>Paid Social</span>
+    <span>Influencer Partnerships</span>
+    <span>Community Management</span>
+    <span>Analytics &amp; Reporting</span>
+    <span>Brand Design</span>
+    <span>Content Strategy</span>
+    <span>Paid Social</span>
+    <span>Influencer Partnerships</span>
+    <span>Community Management</span>
+    <span>Analytics &amp; Reporting</span>
+    <span>Brand Design</span>
+  </div>
+</div>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker">What we do</span>
+      <h2>Six ways we get your brand talked about.</h2>
+      <p>Pick one service or hand us the whole channel — every package is built around your goals, not a template.</p>
+    </div>
+    <div class="service-grid">
+      <div class="s-card">
+        <span class="s-num">01</span>
+        <h3>Content Strategy</h3>
+        <p>Monthly calendars built around what your audience actually stops scrolling for — not just what's trending.</p>
+      </div>
+      <div class="s-card">
+        <span class="s-num">02</span>
+        <h3>Content Creation</h3>
+        <p>Reels, carousels, and photography shot and edited in-house, ready to post the moment they're approved.</p>
+      </div>
+      <div class="s-card">
+        <span class="s-num">03</span>
+        <h3>Paid Social Ads</h3>
+        <p>Meta and TikTok campaigns managed end-to-end, optimised weekly against real revenue, not just clicks.</p>
+      </div>
+      <div class="s-card">
+        <span class="s-num">04</span>
+        <h3>Community Management</h3>
+        <p>Comments and DMs answered in your brand voice, every day — so no lead or complaint goes quiet.</p>
+      </div>
+      <div class="s-card">
+        <span class="s-num">05</span>
+        <h3>Influencer Partnerships</h3>
+        <p>Creator matchmaking and campaign management, from outreach and contracts to performance recaps.</p>
+      </div>
+      <div class="s-card">
+        <span class="s-num">06</span>
+        <h3>Analytics &amp; Reporting</h3>
+        <p>Plain-language monthly reports that tell you what worked, what didn't, and what we're changing next.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <div>
+      <span class="kicker">Who we are</span>
+      <h2>A small agency that treats your channel like our own.</h2>
+      <p class="about-text">Mamaa's International started with one client and a shared Google Sheet. We're still small on purpose — every account gets a dedicated strategist, not a rotating cast of juniors.</p>
+      <p class="about-text">We work with restaurants, retail brands, and founders who want social media that pulls its weight: real bookings, real followers, real conversations — not vanity numbers on a slide.</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-box"><strong>6</strong><span>Years running</span></div>
+      <div class="stat-box"><strong>120+</strong><span>Active & past clients</span></div>
+      <div class="stat-box"><strong>14</strong><span>People on the team</span></div>
+      <div class="stat-box"><strong>92%</strong><span>Clients who renew</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="portfolio" id="portfolio">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker">Recent work</span>
+      <h2>A few campaigns we're proud of.</h2>
+      <p>A snapshot of the brands we've grown — full case studies shared on request.</p>
+    </div>
+    <div class="p-grid">
+      <div class="p-card">
+        <div class="p-thumb g1">Café Loom</div>
+        <div class="p-body"><span class="tag">Content + Reels</span><h3>From 4K to 240K followers</h3><p>A 9-month organic content push for a café chain.</p></div>
+      </div>
+      <div class="p-card">
+        <div class="p-thumb g2">Bloom & Co</div>
+        <div class="p-body"><span class="tag">Paid Social</span><h3>3x bookings in 60 days</h3><p>Meta ads funnel rebuilt around walk-in bookings.</p></div>
+      </div>
+      <div class="p-card">
+        <div class="p-thumb g3">Studio Vetra</div>
+        <div class="p-body"><span class="tag">Launch Campaign</span><h3>Sold-out pop-up in 6 hours</h3><p>Teaser content and influencer seeding for a launch.</p></div>
+      </div>
+      <div class="p-card">
+        <div class="p-thumb g4">Northside Gym</div>
+        <div class="p-body"><span class="tag">Community</span><h3>2,000+ DMs handled monthly</h3><p>Full-time community management and lead routing.</p></div>
+      </div>
+      <div class="p-card">
+        <div class="p-thumb g5">Petal & Pine</div>
+        <div class="p-body"><span class="tag">Influencer</span><h3>32 creator partnerships</h3><p>A seasonal gifting campaign across micro-creators.</p></div>
+      </div>
+      <div class="p-card">
+        <div class="p-thumb g6">Kirana Kitchens</div>
+        <div class="p-body"><span class="tag">Brand Design</span><h3>A full visual refresh</h3><p>New templates, palette, and content system.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact-panel">
+      <div>
+        <h2>Ready to grow a channel people actually follow?</h2>
+        <p class="lead">Tell us about your brand and where you want your social presence to go. We reply within one business day.</p>
+        <div class="contact-list">
+          <a href="mailto:hello@mamaasinternational.com"><span class="ico">@</span>hello@mamaasinternational.com</a>
+          <a href="tel:+910000000000"><span class="ico">☎</span>+91 00000 00000</a>
+          <a href="#"><span class="ico">◎</span>@mamaasinternational</a>
+        </div>
+      </div>
+      <form id="contactForm">
+        <div class="form-field">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" required placeholder="Full name">
+        </div>
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required placeholder="you@company.com">
+        </div>
+        <div class="form-field">
+          <label for="message">Tell us about your brand</label>
+          <textarea id="message" name="message" required placeholder="What are you hoping social media does for your business?"></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send message</button>
+        <p class="form-note">This form opens your email app with the message pre-filled — no data is stored on this site.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a href="#home" class="logo"><span class="dot"></span>Mamaa's International</a>
+    <div class="foot-links">
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <p class="foot-copy">© 2026 Mamaa's International. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  const burger = document.getElementById('burger');
+  const panel = document.getElementById('mobilePanel');
+  burger.addEventListener('click', () => {
+    const open = panel.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open);
+  });
+  panel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    panel.classList.remove('open');
+    burger.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+  }));
+
+  document.getElementById('contactForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+    const subject = encodeURIComponent('New enquiry from ' + name);
+    const body = encodeURIComponent(message + '\n\nFrom: ' + name + ' (' + email + ')');
+    window.location.href = 'mailto:hello@mamaasinternational.com?subject=' + subject + '&body=' + body;
+  });
+</script>
+
+</body>
+</html>
